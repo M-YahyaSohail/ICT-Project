@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. Theme Toggle (Persisted) ---
+
     const themeToggleBtn = document.getElementById('theme-toggle');
     const body = document.body;
 
-    // Check local storage
+
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         body.classList.add('light-mode');
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. Navbar Scroll Effect ---
+
     const header = document.querySelector('header');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 3. Typing Effect (Only on Home Page) ---
+
     const typingText = document.querySelector('.typing-text');
     if (typingText) {
         const phrases = ["Digital Experiences", "Intelligent Systems", "Modern Web Apps"];
@@ -42,30 +42,30 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isDeleting) {
                 typingText.textContent = currentPhrase.substring(0, charIndex - 1);
                 charIndex--;
-                typeSpeed = 50; // Faster deleting
+                typeSpeed = 50;
             } else {
                 typingText.textContent = currentPhrase.substring(0, charIndex + 1);
                 charIndex++;
-                typeSpeed = 100; // Normal typing
+                typeSpeed = 100;
             }
 
             if (!isDeleting && charIndex === currentPhrase.length) {
                 isDeleting = true;
-                typeSpeed = 2000; // Pause at end
+                typeSpeed = 2000;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 phraseIndex = (phraseIndex + 1) % phrases.length;
-                typeSpeed = 500; // Pause before new phrase
+                typeSpeed = 500;
             }
 
             setTimeout(type, typeSpeed);
         }
 
-        // Start typing
+
         setTimeout(type, 1000);
     }
 
-    // --- 4. 3D Tilt Effect for Cards & Hero Image ---
+
     const cards = document.querySelectorAll('.project-card, .team-card, .hero-img img');
 
     cards.forEach(card => {
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
-            const rotateX = ((y - centerY) / centerY) * -5; // Max rotation deg
+            const rotateX = ((y - centerY) / centerY) * -5;
             const rotateY = ((x - centerX) / centerX) * 5;
 
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
         });
 
-        // Smooth transition handling
+
         card.addEventListener('mouseenter', () => {
             card.style.transition = 'none';
         });
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 5. Reveal on Scroll Animation ---
+
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
 
     const revealObserver = new IntersectionObserver((entries) => {
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // --- 6. Form Handling (Contact Page) ---
+
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -120,11 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalText = btn.innerHTML;
             const msgDiv = document.getElementById('form-message');
 
-            // Loading state
+
             btn.innerHTML = 'Sending...';
             btn.disabled = true;
 
-            // Simulate API call
+
             setTimeout(() => {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 msgDiv.innerHTML = '<div class="success-msg">Message sent successfully! We will get back to you soon.</div>';
 
-                // Auto hide message
+
                 setTimeout(() => {
                     msgDiv.innerHTML = '';
                 }, 5000);
@@ -140,18 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 7. View Profile Toggle (Team Page) ---
+
     const viewProfileBtns = document.querySelectorAll('.view-profile');
     viewProfileBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent default if it's inside a form or link
+            e.preventDefault();
             const content = btn.nextElementSibling;
             content.classList.toggle('active');
             btn.textContent = content.classList.contains('active') ? 'Hide Profile' : 'View Profile';
         });
     });
 
-    // --- 8. Modal Handling (If present) ---
+
     const modal = document.getElementById('alert-modal');
     const closeModal = document.getElementById('close-modal');
 
@@ -167,8 +167,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 9. Custom Cursor Logic ---
-    // Create cursor elements
+
+
     const cursorDot = document.createElement('div');
     cursorDot.classList.add('cursor-dot');
     const cursorOutline = document.createElement('div');
@@ -180,18 +180,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const posX = e.clientX;
         const posY = e.clientY;
 
-        // Dot follows instantly
+
         cursorDot.style.left = `${posX}px`;
         cursorDot.style.top = `${posY}px`;
 
-        // Outline follows with slight delay (using animation/transition in CSS)
+
         cursorOutline.animate({
             left: `${posX}px`,
             top: `${posY}px`
         }, { duration: 500, fill: "forwards" });
     });
 
-    // Hover effect for interactive elements
+
     const interactiveElements = document.querySelectorAll('a, button, .project-card, .team-card, input, textarea');
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 10. Preloader ---
+
     const preloader = document.getElementById('preloader');
     if (preloader) {
         window.addEventListener('load', () => {
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 11. Scroll to Top Button ---
+
     const scrollTopBtn = document.getElementById('scroll-top');
     if (scrollTopBtn) {
         window.addEventListener('scroll', () => {
